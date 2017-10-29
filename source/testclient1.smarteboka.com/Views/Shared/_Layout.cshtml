@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using testclient1.smarteboka.com
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,6 +28,20 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">testclient1.smarteboka.com</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        @{
+                            var name = User.GetName() ?? "No-name";
+                        }
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@name <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-action="Logout" asp-controller="Account">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            }                   
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -35,6 +50,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
             </div>
+         
         </div>
     </nav>
     <div class="container body-content">
